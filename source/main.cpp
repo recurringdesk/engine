@@ -1,7 +1,10 @@
 #include <untitled/console/logger.hpp>
-using namespace Untitled::Console;
-int main()
+#include "program.hpp"
+using namespace Untitled;
+using namespace Console;
+
+int main(const int argc, char* argv[])
 {
-    Logger::print("Hello, world!\n");
-    return 0;
+    Engine::Program program;
+    return program.execute();
 }

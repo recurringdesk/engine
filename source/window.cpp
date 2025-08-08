@@ -1,33 +1,70 @@
 #include "window.hpp"
 #include <untitled/string.hpp>
+#include <untitled/console/logger.hpp>
 #include <GLFW/glfw3.h>
-namespace Untitled::Engine
+using Log = Untitled::Console::Logger;
+namespace Untitled::Engine::System
 {
-    struct WindowHandle
+    struct Handle
     {
         int width;
         int height;
-        GLFWwindow* window;
+        GLFWwindow* id = nullptr;
         const char* title;
-        WindowHandle(const int new_width, const int new_height, const char* new_title)
+        Handle(const int new_width, const int new_height, const char* new_title)
             : width(new_width), height(new_height), title(new_title)
         {
-            glfwInit();
-            window = glfwCreateWindow(width, height, title, nullptr, nullptr);
+            if (!glfwInit()) throw 1;
+            id = glfwCreateWindow(width, height, title, nullptr, nullptr);
+            if (!id) throw 2;
+            glfwMakeContextCurrent(id);
+            swap_buffer();
         }
-        [[nodiscard]] bool should_close() const
+        ~Handle()
         {
-            return glfwWindowShouldClose(window);
+            if (id == nullptr) return;
+            glfwDestroyWindow(id);
+        }
+        void swap_buffer() const
+        {
+            glfwSwapBuffers(id);
+        }
+        static void poll_events()
+        {
+            glfwPollEvents();
+        }
+        void wait_events() const
+        {
+            glfwWaitEvents();
+        }
+        bool should_close() const
+        {
+            return glfwWindowShouldClose(id);
         }
     };
-    Window::Window()
-        : handle(new WindowHandle(800, 600, "Title"))
+    Window::Window(const String& title, int width, int height)
+        : handler(new Handle(width, height, title.raw()))
     {
+    }
 
+    void Window::poll_events() const
+    {
+        handler->poll_events();
+    }
+
+    void Window::wait_events() const
+    {
+        handler->wait_events();
+    }
+
+    void Window::swap_buffer() const
+    {
+        handler->swap_buffer();
     }
 
     Window::~Window()
     {
+        delete handler;
     }
 
     String Window::get_title() const
@@ -37,7 +74,7 @@ namespace Untitled::Engine
 
     bool Window::should_close() const
     {
-        return handle->should_close();
+        return handler->should_close();
     }
 
     void Window::set_title(const String& new_title)

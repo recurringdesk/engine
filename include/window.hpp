@@ -1,21 +1,24 @@
 #ifndef UNTITLED_ENGINE_WINDOW_GUARD
 #define UNTITLED_ENGINE_WINDOW_GUARD
 #include <untitled/string.hpp>
-namespace Untitled::Engine
+namespace Untitled::Engine::System
 {
-    struct WindowHandle;
+    struct Handle;
     class Window
     {
-        WindowHandle* handle;
+        Handle* handler;
         String title;
     public:
-        Window();
+        Window(const String& title = "Window", int width = 800, int height = 600);
         ~Window();
         void set_title(const String& new_title);
-        [[nodiscard]] bool should_close() const;
-        [[nodiscard]] String get_title() const;
+        bool should_close() const;
+        String get_title() const;
         void show();
         void hide();
+        void poll_events() const;
+        void swap_buffer() const;
+        void wait_events() const;
     };
 }
 #endif // UNTITLED_ENGINE_WINDOW_GUARD
