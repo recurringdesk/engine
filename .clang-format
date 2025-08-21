@@ -1,0 +1,22 @@
+Language: Cpp
+BasedOnStyle: GNU
+IndentWidth: 4
+PointerAlignment: Left
+NamespaceIndentation: All
+FixNamespaceComments: true
+RemoveSemicolon: true
+SeparateDefinitionBlocks: Always
+BreakBeforeBraces: Custom
+BraceWrapping:
+  AfterClass: true
+  AfterControlStatement: true
+  AfterEnum: true
+  AfterFunction: true
+  AfterNamespace: true
+  AfterStruct: true
+  AfterUnion: true
+  BeforeCatch: true
+  BeforeElse: true
+  IndentBraces: false
+AccessModifierOffset: -4
+ColumnLimit: 0

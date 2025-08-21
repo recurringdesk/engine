@@ -1,10 +1,13 @@
-#include <untitled/console/logger.hpp>
-#include "program.hpp"
-using namespace Untitled;
-using namespace Console;
+#include <recurring/console/logger.hpp>
+#include <recurring/core/window.hpp>
 
-int main(const int argc, char* argv[])
+using Recurring::System::OpenGL::Context;
+
+int
+main (const int argc, char* argv[])
 {
-    Engine::Program program;
-    return program.execute();
+    Context context;
+    context.create (800, 600, "ReEngine");
+    context.run (nullptr);
+    return 0;
 }

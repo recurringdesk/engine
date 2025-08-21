@@ -1,11 +1,7 @@
-#ifndef UNTITLED_ENGINE_PROGRAM_GUARD
-#define UNTITLED_ENGINE_PROGRAM_GUARD
-namespace Untitled::Engine
+#ifndef RE_ENGINE_PROGRAM_GUARD
+#define RE_ENGINE_PROGRAM_GUARD
+
+namespace Recurring
 {
-    class Program
-    {
-    public:
-        virtual int execute();
-    };
 }
-#endif // UNTITLED_ENGINE_PROGRAM_GUARD
+#endif // RE_ENGINE_PROGRAM_GUARD
