@@ -20,3 +20,4 @@ BraceWrapping:
   IndentBraces: false
 AccessModifierOffset: -4
 ColumnLimit: 0
+SortIncludes: false
