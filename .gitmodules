@@ -1,0 +1,3 @@
+[submodule "dependencies/utils"]
+	path = dependencies/utils
+	url = https://github.com/recurringdesk/utils.git
